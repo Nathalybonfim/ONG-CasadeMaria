@@ -34,7 +34,7 @@ O projeto é **totalmente responsivo**, com **estrutura de pastas organizada** e
 ## 🌐 Visualizar o Projeto
 
 Acesse o site publicado no GitHub Pages:  
-👉 [https://nathalybonfim.github.io/ONG-CasadeMaria/](https://nathalybonfim.github.io/ONG-CasadeMaria/)
+👉 [https://nathalybonfim.github.io/ONG-CasadeMaria/](https://github.com/Nathalybonfim/ONG-CasadeMaria.git)
 
 ---
 
