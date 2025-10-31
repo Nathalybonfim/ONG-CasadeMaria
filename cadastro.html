@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro de Voluntário - ONG Casa de Maria</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #609bec;
+      text-align: center;
+      color: #333;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+    }
+
+    header, footer {
+      background-color: #f2f2f2;
+      padding: 15px 0;
+    }
+
+    h1, h2 {
+      color: #5a2d0c;
+      margin-bottom: 10px;
+    }
+
+    nav a {
+      margin: 0 10px;
+      color: #5a2d0c;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    form {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 500px;
+      margin: 20px auto;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      text-align: left;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    input, select, button {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background-color: #5a2d0c;
+      color: white;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      margin-top: 15px;
+      padding: 12px 20px;
+      border-radius: 8px;
+    }
+
+    button:hover {
+      background-color: #7b4523;
+    }
+
+    #feedback {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Cadastro de Voluntários</h1>
+    <p><a href="index.html">← Voltar ao início</a></p>
+  </header>
+
+  <main>
+    <form id="cadastro-form" novalidate>
+      <label>Nome completo:
+        <input type="text" name="nome" required>
+      </label>
+
+      <label>E-mail:
+        <input type="email" name="email" required>
+      </label>
+
+      <label>CPF:
+        <input id="cpf" type="text" name="cpf" required placeholder="000.000.000-00">
+      </label>
+
+      <label>Telefone:
+        <input id="telefone" type="tel" name="telefone" required placeholder="(00) 00000-0000">
+      </label>
+
+      <label>Data de nascimento:
+        <input type="date" name="nasc" required>
+      </label>
+
+      <label>CEP:
+        <input id="cep" type="text" name="cep" required placeholder="00000-000">
+      </label>
+
+      <label>Endereço:
+        <input type="text" name="endereco" required>
+      </label>
+
+      <label>Cidade:
+        <input type="text" name="cidade" required>
+      </label>
+
+      <label>Estado:
+        <select name="estado" required>
+          <option value="">Selecione</option>
+          <option value="SP">SP</option>
+          <option value="RJ">RJ</option>
+          <option value="MG">MG</option>
+          <option value="Outros estados">Outros</option>
+        </select>
+      </label>
+
+      <button type="submit">Enviar cadastro</button>
+      <div id="feedback" aria-live="polite"></div>
+    </form>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Casa de Maria - Todos os direitos reservados.</p>
+  </footer>
+
+  <script>
+    const cpfInput = document.getElementById('cpf');
+    const telInput = document.getElementById('telefone');
+    const cepInput = document.getElementById('cep');
+
+    cpfInput.addEventListener('input', function() {
+      let value = this.value.replace(/\D/g, '');
+      if(value.length > 11) value = value.slice(0,11);
+      value = value.replace(/(\d{3})(\d)/, '$1.$2');
+      value = value.replace(/(\d{3})(\d)/, '$1.$2');
+      value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
+      this.value = value;
+    });
+
+    telInput.addEventListener('input', function() {
+      let value = this.value.replace(/\D/g, '');
+      if(value.length > 11) value = value.slice(0,11);
+      value = value.replace(/^(\d{2})(\d)/g, '($1) $2');
+      value = value.replace(/(\d{5})(\d)/, '$1-$2');
+      this.value = value;
+    });
+
+    cepInput.addEventListener('input', function() {
+      let value = this.value.replace(/\D/g, '');
+      if(value.length > 8) value = value.slice(0,8);
+      value = value.replace(/(\d{5})(\d)/, '$1-$2');
+      this.value = value;
+    });
+
+    const form = document.getElementById('cadastro-form');
+    const fb = document.getElementById('feedback');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (!form.checkValidity()) {
+        fb.textContent = 'Por favor, preencha todos os campos obrigatórios.';
+        fb.style.color = 'red';
+        return;
+      }
+      fb.textContent = 'Cadastro enviado com sucesso! 💛 Obrigada por fazer parte da Casa de Maria.';
+      fb.style.color = 'green';
+      form.reset();
+    });
+  </script>
+</body>
+</html>
